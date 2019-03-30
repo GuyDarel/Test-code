@@ -1,23 +1,22 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Descend implements Strategy{
-
+	
 	@Override
-	public String [] organize(String [] str) {
-		// TODO Auto-generated method stub
-		//System.out.println("HUH");
-		for(int i = 0; i != 50; i++) {
-			for(int j = 0; j != 50; j++) {
-				String key   = str[i];
-				if( key.compareToIgnoreCase( str[j] ) < 0 ){
-					for(int k = j; k != i-1 ;j++) {
-						str[k+1] = str[k];
-					}
-					str[j] = key;
-					break;
+	public String []  organize(String [] str) {
+		ArrayList<String> string = new ArrayList<String>(Arrays.asList(str));//convert array to arraylist
+		int len = string.size();
+		for(int i = 0; i != len; i++) {
+			for(int j = i; j != len; j++) {
+				String key = (String)string.get(i);
+				if( key.compareToIgnoreCase( (String)string.get(j) ) < 0 ){//compare ival to jval an swap if necessary
+					Collections.swap(string,i,j);//swap istring with jstring
 				}
 			}
 		}
-		return str;
+		str = string.toArray(str);
+		return str;	
 	}
-
 }
